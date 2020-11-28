@@ -48,6 +48,10 @@ namespace ColorsBall
 				pctPlayer.Top = pnlArena.ClientSize.Height - pctPlayer.Height;
 			if (pctPlayer.Right >= pnlArena.ClientSize.Width)
 				pctPlayer.Left = pnlArena.ClientSize.Width - pctPlayer.Width;
+
+			// Check if ball hits the player
+			if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds))
+				pctPlayer.Image = Properties.Resources.sans_hit;
 		}
 	}
 }
