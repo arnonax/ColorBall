@@ -40,6 +40,14 @@ namespace ColorsBall
 				pctPlayer.Left -= 10;
 			if (Keyboard.IsKeyDown(Key.Right))
 				pctPlayer.Left += 10;
+			if (pctPlayer.Top <= 0)
+				pctPlayer.Top = 0;
+			if (pctPlayer.Left <= 0)
+				pctPlayer.Left = 0;
+			if (pctPlayer.Bottom >= pnlArena.ClientSize.Height)
+				pctPlayer.Top = pnlArena.ClientSize.Height - pctPlayer.Height;
+			if (pctPlayer.Right >= pnlArena.ClientSize.Width)
+				pctPlayer.Left = pnlArena.ClientSize.Width - pctPlayer.Width;
 		}
 	}
 }
