@@ -54,20 +54,21 @@ namespace ColorsBall
 					pctPlayer.Left = pnlArena.ClientSize.Width - pctPlayer.Width;
 			}
 			else
+			{
 				timesUntilResurect++;
-			
+				if (timesUntilResurect == 30)
+				{
+					stop = false;
+					timesUntilResurect = 0;
+					pctPlayer.Image = Properties.Resources.Sans;
+				}
+			}
+
 			// Check if ball hits the player
 			if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds))
 			{
 				pctPlayer.Image = Properties.Resources.sans_hit;
 				stop = true;
-			}
-			if (timesUntilResurect == 100)
-			{
-				stop = false;
-				timesUntilResurect = 0;
-				pctPlayer.Image = Properties.Resources.Sans;
-
 			}
 		}
 	}
