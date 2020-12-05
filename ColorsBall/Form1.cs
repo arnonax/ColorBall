@@ -16,6 +16,7 @@ namespace ColorsBall
 	{
 		int dx=10, dy=10;
 		bool stop = false;
+		int timesUntilResurect = 0;
 
 		public frmMain()
 		{
@@ -52,11 +53,21 @@ namespace ColorsBall
 				if (pctPlayer.Right >= pnlArena.ClientSize.Width)
 					pctPlayer.Left = pnlArena.ClientSize.Width - pctPlayer.Width;
 			}
+			else
+				timesUntilResurect++;
+			
 			// Check if ball hits the player
 			if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds))
 			{
 				pctPlayer.Image = Properties.Resources.sans_hit;
 				stop = true;
+			}
+			if (timesUntilResurect == 100)
+			{
+				stop = false;
+				timesUntilResurect = 0;
+				pctPlayer.Image = Properties.Resources.Sans;
+
 			}
 		}
 	}
