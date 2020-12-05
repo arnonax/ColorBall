@@ -30,9 +30,11 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.pnlArena = new System.Windows.Forms.Panel();
-			this.tmrBall = new System.Windows.Forms.Timer(this.components);
 			this.pctBall = new System.Windows.Forms.PictureBox();
 			this.pctPlayer = new System.Windows.Forms.PictureBox();
+			this.tmrBall = new System.Windows.Forms.Timer(this.components);
+			this.label1 = new System.Windows.Forms.Label();
+			this.pgbLives = new System.Windows.Forms.ProgressBar();
 			this.pnlArena.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pctBall)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pctPlayer)).BeginInit();
@@ -50,12 +52,6 @@
 			this.pnlArena.Name = "pnlArena";
 			this.pnlArena.Size = new System.Drawing.Size(932, 465);
 			this.pnlArena.TabIndex = 0;
-			// 
-			// tmrBall
-			// 
-			this.tmrBall.Enabled = true;
-			this.tmrBall.Interval = 20;
-			this.tmrBall.Tick += new System.EventHandler(this.tmrBall_Tick);
 			// 
 			// pctBall
 			// 
@@ -77,11 +73,37 @@
 			this.pctPlayer.TabIndex = 2;
 			this.pctPlayer.TabStop = false;
 			// 
+			// tmrBall
+			// 
+			this.tmrBall.Enabled = true;
+			this.tmrBall.Interval = 20;
+			this.tmrBall.Tick += new System.EventHandler(this.tmrBall_Tick);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Arial Narrow", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(500, 549);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(69, 33);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "Lives";
+			// 
+			// pgbLives
+			// 
+			this.pgbLives.Location = new System.Drawing.Point(444, 585);
+			this.pgbLives.Name = "pgbLives";
+			this.pgbLives.Size = new System.Drawing.Size(193, 23);
+			this.pgbLives.TabIndex = 2;
+			this.pgbLives.Value = 100;
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1118, 641);
+			this.Controls.Add(this.pgbLives);
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.pnlArena);
 			this.DoubleBuffered = true;
 			this.Name = "frmMain";
@@ -90,6 +112,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pctBall)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pctPlayer)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -99,6 +122,8 @@
 		private System.Windows.Forms.PictureBox pctBall;
 		private System.Windows.Forms.Timer tmrBall;
 		private System.Windows.Forms.PictureBox pctPlayer;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ProgressBar pgbLives;
 	}
 }
 

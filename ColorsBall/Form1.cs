@@ -17,6 +17,7 @@ namespace ColorsBall
 		int dx=10, dy=10;
 		bool stop = false;
 		int timesUntilResurect = 0;
+		int lives=100;
 
 		public frmMain()
 		{
@@ -52,6 +53,20 @@ namespace ColorsBall
 					pctPlayer.Top = pnlArena.ClientSize.Height - pctPlayer.Height;
 				if (pctPlayer.Right >= pnlArena.ClientSize.Width)
 					pctPlayer.Left = pnlArena.ClientSize.Width - pctPlayer.Width;
+				
+				// Check if ball hits the player
+				if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds))
+				{
+					pctPlayer.Image = Properties.Resources.sans_hit;
+					stop = true;
+					lives -= 10;
+					pgbLives.Value = lives;
+					if (lives <= 0)
+					{
+						tmrBall.Stop();
+						MessageBox.Show("GAME OVER!!!");
+					}
+				}
 			}
 			else
 			{
@@ -62,13 +77,6 @@ namespace ColorsBall
 					timesUntilResurect = 0;
 					pctPlayer.Image = Properties.Resources.Sans;
 				}
-			}
-
-			// Check if ball hits the player
-			if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds))
-			{
-				pctPlayer.Image = Properties.Resources.sans_hit;
-				stop = true;
 			}
 		}
 	}
