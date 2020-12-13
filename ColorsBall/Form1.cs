@@ -10,11 +10,20 @@ namespace ColorsBall
 		bool stop = false;
 		int timesUntilResurect = 0;
 		int lives=100;
-		int timeUntilRed = 0;
+		int ticksUntilRed;
+		const int secondsUntilRed = 10;
 
 		public frmMain()
 		{
 			InitializeComponent();
+			ticksUntilRed = SecondsToTicks(secondsUntilRed);
+		}
+
+		private int SecondsToTicks(int seconds)
+		{
+			int ticksInSecond = 1000 / tmrBall.Interval;
+			int ticks = seconds * ticksInSecond;
+			return ticks;
 		}
 
 		private void tmrBall_Tick(object sender, EventArgs e)
@@ -71,8 +80,8 @@ namespace ColorsBall
 					pctPlayer.Image = Properties.Resources.Sans;
 				}
 			}
-			timeUntilRed++;
-			if (timeUntilRed == 500)
+			ticksUntilRed--;
+			if (ticksUntilRed == 0)
 				pctBall.Image = Properties.Resources.RedBall;
 		}
 	}
