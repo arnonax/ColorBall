@@ -12,6 +12,7 @@ namespace ColorsBall
 		int lives=100;
 		int ticksUntilRed;
 		const int secondsUntilRed = 10;
+		bool isGreenBall = true;
 
 		public frmMain()
 		{
@@ -57,7 +58,7 @@ namespace ColorsBall
 					pctPlayer.Left = pnlArena.ClientSize.Width - pctPlayer.Width;
 				
 				// Check if ball hits the player
-				if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds))
+				if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds) && isGreenBall)
 				{
 					pctPlayer.Image = Properties.Resources.sans_hit;
 					stop = true;
@@ -82,7 +83,10 @@ namespace ColorsBall
 			}
 			ticksUntilRed--;
 			if (ticksUntilRed == 0)
+			{
 				pctBall.Image = Properties.Resources.RedBall;
+				isGreenBall = false;
+			}
 		}
 	}
 }
