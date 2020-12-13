@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -18,6 +10,7 @@ namespace ColorsBall
 		bool stop = false;
 		int timesUntilResurect = 0;
 		int lives=100;
+		int timeUntilRed = 0;
 
 		public frmMain()
 		{
@@ -78,6 +71,9 @@ namespace ColorsBall
 					pctPlayer.Image = Properties.Resources.Sans;
 				}
 			}
+			timeUntilRed++;
+			if (timeUntilRed == 500)
+				pctBall.Image = Properties.Resources.RedBall;
 		}
 	}
 }

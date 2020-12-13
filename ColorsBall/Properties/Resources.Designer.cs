@@ -73,6 +73,16 @@ namespace ColorsBall.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RedBall {
+            get {
+                object obj = ResourceManager.GetObject("RedBall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Sans {
             get {
                 object obj = ResourceManager.GetObject("Sans", resourceCulture);
