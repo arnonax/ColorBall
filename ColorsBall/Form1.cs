@@ -63,9 +63,9 @@ namespace ColorsBall
 				// Check if ball hits the player
 				if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds))
 				{
-					stop = true;
 					if (isGreenBall)
 					{
+						stop = true;
 						pctPlayer.Image = Properties.Resources.sans_hit;
 						lives -= 10;
 						lblLives.Text = lives + "/100";
@@ -76,9 +76,10 @@ namespace ColorsBall
 							MessageBox.Show("GAME OVER!!!");
 						}
 					}
-					else
+					else if (Keyboard.IsKeyDown(Key.Space))
 					{
 						pctPlayer.Image = Properties.Resources.sans_hits_ball;
+						stop = true;
 					}
 				}
 			}
