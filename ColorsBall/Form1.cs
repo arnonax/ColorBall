@@ -61,17 +61,24 @@ namespace ColorsBall
 					pctPlayer.Left = pnlArena.ClientSize.Width - pctPlayer.Width;
 				
 				// Check if ball hits the player
-				if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds) && isGreenBall)
+				if (pctPlayer.Bounds.IntersectsWith(pctBall.Bounds))
 				{
-					pctPlayer.Image = Properties.Resources.sans_hit;
 					stop = true;
-					lives -= 10;
-					lblLives.Text = lives + "/100";
-					pgbLives.Value = lives;
-					if (lives <= 0)
+					if (isGreenBall)
 					{
-						tmrBall.Stop();
-						MessageBox.Show("GAME OVER!!!");
+						pctPlayer.Image = Properties.Resources.sans_hit;
+						lives -= 10;
+						lblLives.Text = lives + "/100";
+						pgbLives.Value = lives;
+						if (lives <= 0)
+						{
+							tmrBall.Stop();
+							MessageBox.Show("GAME OVER!!!");
+						}
+					}
+					else
+					{
+						pctPlayer.Image = Properties.Resources.sans_hits_ball;
 					}
 				}
 			}
