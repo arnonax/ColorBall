@@ -35,6 +35,8 @@
 			this.tmrBall = new System.Windows.Forms.Timer(this.components);
 			this.label1 = new System.Windows.Forms.Label();
 			this.pgbLives = new System.Windows.Forms.ProgressBar();
+			this.lblLives = new System.Windows.Forms.Label();
+			this.pgbBallLives = new System.Windows.Forms.ProgressBar();
 			this.pnlArena.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pctBall)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pctPlayer)).BeginInit();
@@ -97,11 +99,32 @@
 			this.pgbLives.TabIndex = 2;
 			this.pgbLives.Value = 100;
 			// 
+			// lblLives
+			// 
+			this.lblLives.AutoSize = true;
+			this.lblLives.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblLives.Location = new System.Drawing.Point(738, 575);
+			this.lblLives.Name = "lblLives";
+			this.lblLives.Size = new System.Drawing.Size(119, 33);
+			this.lblLives.TabIndex = 3;
+			this.lblLives.Text = "100/100";
+			// 
+			// pgbBallLives
+			// 
+			this.pgbBallLives.Location = new System.Drawing.Point(338, 31);
+			this.pgbBallLives.Maximum = 30;
+			this.pgbBallLives.Name = "pgbBallLives";
+			this.pgbBallLives.Size = new System.Drawing.Size(363, 44);
+			this.pgbBallLives.TabIndex = 4;
+			this.pgbBallLives.Value = 30;
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1118, 641);
+			this.Controls.Add(this.pgbBallLives);
+			this.Controls.Add(this.lblLives);
 			this.Controls.Add(this.pgbLives);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.pnlArena);
@@ -124,6 +147,8 @@
 		private System.Windows.Forms.PictureBox pctPlayer;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ProgressBar pgbLives;
+		private System.Windows.Forms.Label lblLives;
+		private System.Windows.Forms.ProgressBar pgbBallLives;
 	}
 }
 

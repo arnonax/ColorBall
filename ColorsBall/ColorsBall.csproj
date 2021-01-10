@@ -94,5 +94,9 @@
   <ItemGroup>
     <None Include="Resources\RedBall.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Backlog.txt" />
+    <Content Include="Resources\sans_hits_ball.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

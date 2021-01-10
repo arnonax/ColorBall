@@ -1,0 +1,5 @@
+﻿1. Start the ball in a random location
+2. The time from green to red should be random
+3. Change the size of the window to full-screen
+4. Add music
+5. When ball reaches a corner it turns into super-ball

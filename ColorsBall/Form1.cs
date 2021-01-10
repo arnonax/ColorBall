@@ -11,13 +11,16 @@ namespace ColorsBall
 		int timesUntilResurect = 0;
 		int lives=100;
 		int ticksUntilRed;
-		const int secondsUntilRed = 10;
+		int ticksUntilGreen;
+		const int secondsUntilRed = 2;//7;
+		const int secondsUntilGreen = secondsUntilRed + 3;//9;
 		bool isGreenBall = true;
 
 		public frmMain()
 		{
 			InitializeComponent();
 			ticksUntilRed = SecondsToTicks(secondsUntilRed);
+			ticksUntilGreen = SecondsToTicks(secondsUntilGreen);
 		}
 
 		private int SecondsToTicks(int seconds)
@@ -63,6 +66,7 @@ namespace ColorsBall
 					pctPlayer.Image = Properties.Resources.sans_hit;
 					stop = true;
 					lives -= 10;
+					lblLives.Text = lives + "/100";
 					pgbLives.Value = lives;
 					if (lives <= 0)
 					{
@@ -82,10 +86,18 @@ namespace ColorsBall
 				}
 			}
 			ticksUntilRed--;
+			ticksUntilGreen--;
 			if (ticksUntilRed == 0)
 			{
 				pctBall.Image = Properties.Resources.RedBall;
 				isGreenBall = false;
+			}
+			if (ticksUntilGreen == 0)
+			{
+				pctBall.Image = Properties.Resources.GreenBall;
+				isGreenBall = true;
+				ticksUntilRed = SecondsToTicks(secondsUntilRed);
+				ticksUntilGreen = SecondsToTicks(secondsUntilGreen);
 			}
 		}
 	}
