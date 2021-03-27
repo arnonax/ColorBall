@@ -7,7 +7,8 @@ namespace ColorsBall
 	public partial class frmMain : Form
 	{
 		int dx=10, dy=10;
-		bool stop = false;
+		bool stopPlayer = false;
+		bool stopBall = false;
 		int timesUntilResurect = 0;
 		int lives=100;
 		int ticksUntilRed;
@@ -33,15 +34,18 @@ namespace ColorsBall
 		private void tmrBall_Tick(object sender, EventArgs e)
 		{
 			// Move ball
-			pctBall.Left += dx;
-			pctBall.Top += dy;
-			if (pctBall.Bottom >= pnlArena.ClientSize.Height || pctBall.Top < 0)
-				dy = -dy;
-			if (pctBall.Right >= pnlArena.ClientSize.Width || pctBall.Left < 0)
-				dx = -dx;
+			if (!stopBall)
+			{
+				pctBall.Left += dx;
+				pctBall.Top += dy;
+				if (pctBall.Bottom >= pnlArena.ClientSize.Height || pctBall.Top < 0)
+					dy = -dy;
+				if (pctBall.Right >= pnlArena.ClientSize.Width || pctBall.Left < 0)
+					dx = -dx;
+			}
 
 			// Move player
-			if (!stop)
+			if (!stopPlayer)
 			{
 				if (Keyboard.IsKeyDown(Key.Up))
 					pctPlayer.Top -= 10;
@@ -65,7 +69,7 @@ namespace ColorsBall
 				{
 					if (isGreenBall)
 					{
-						stop = true;
+						stopPlayer = true;
 						pctPlayer.Image = Properties.Resources.sans_hit;
 						lives -= 10;
 						lblLives.Text = lives + "/100";
@@ -82,16 +86,18 @@ namespace ColorsBall
 						if (dx > 0)
 							pctPlayer.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipX);
 
-						stop = true;
+						stopPlayer = true;
+						stopBall = true;
 					}
 				}
 			}
-			else
+			else // stopPlayer == true
 			{
 				timesUntilResurect++;
 				if (timesUntilResurect == 30)
 				{
-					stop = false;
+					stopPlayer = false;
+					stopBall = false;
 					timesUntilResurect = 0;
 					pctPlayer.Image = Properties.Resources.Sans;
 				}
