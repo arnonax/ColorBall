@@ -77,7 +77,7 @@ namespace ColorsBall
 						if (lives <= 0)
 						{
 							tmrBall.Stop();
-							MessageBox.Show("GAME OVER!!!");
+							MessageBox.Show("YOU LOSE!!!");
 						}
 					}
 					else if (Keyboard.IsKeyDown(Key.Space))
@@ -89,6 +89,11 @@ namespace ColorsBall
 						stopPlayer = true;
 						stopBall = true;
 						pgbBallLives.Value -= 10;
+						if (pgbBallLives.Value <= 0)
+						{
+							tmrBall.Stop();
+							MessageBox.Show("YOU WIN!!!");
+						}
 					}
 				}
 			}
