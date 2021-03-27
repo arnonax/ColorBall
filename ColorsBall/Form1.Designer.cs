@@ -128,6 +128,8 @@
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.pnlArena);
 			this.DoubleBuffered = true;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.MaximizeBox = false;
 			this.Name = "frmMain";
 			this.Text = "Form1";
 			this.pnlArena.ResumeLayout(false);
