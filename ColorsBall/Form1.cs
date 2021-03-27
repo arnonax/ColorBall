@@ -76,19 +76,13 @@ namespace ColorsBall
 							MessageBox.Show("GAME OVER!!!");
 						}
 					}
-					else
+					else if (Keyboard.IsKeyDown(Key.Space))
 					{
-						if (Keyboard.IsKeyDown(Key.Space) && dx < 0)
-						{
-							pctPlayer.Image = Properties.Resources.sans_hits_ball;
-							stop = true;
-						}
-						if (Keyboard.IsKeyDown(Key.Space) && dx > 0)
-						{
-							pctPlayer.Image = Properties.Resources.sans_hits_ball;
+						pctPlayer.Image = Properties.Resources.sans_hits_ball;
+						if (dx > 0)
 							pctPlayer.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipX);
-							stop = true;
-						}
+
+						stop = true;
 					}
 				}
 			}
