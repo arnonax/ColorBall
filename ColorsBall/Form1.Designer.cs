@@ -112,11 +112,10 @@
 			// pgbBallLives
 			// 
 			this.pgbBallLives.Location = new System.Drawing.Point(338, 31);
-			this.pgbBallLives.Maximum = 30;
 			this.pgbBallLives.Name = "pgbBallLives";
 			this.pgbBallLives.Size = new System.Drawing.Size(363, 44);
 			this.pgbBallLives.TabIndex = 4;
-			this.pgbBallLives.Value = 30;
+			this.pgbBallLives.Value = 100;
 			// 
 			// frmMain
 			// 

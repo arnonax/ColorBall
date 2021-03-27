@@ -88,6 +88,7 @@ namespace ColorsBall
 
 						stopPlayer = true;
 						stopBall = true;
+						pgbBallLives.Value -= 10;
 					}
 				}
 			}
