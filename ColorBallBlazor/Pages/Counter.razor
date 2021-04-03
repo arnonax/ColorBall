@@ -1,0 +1,41 @@
+﻿@page "/counter"
+<style>
+    .ball {
+        position:relative;
+        left:@(this.currentCount*10)px;
+        top:@(this.currentCount*10)px;
+        width:66px;
+        height:66px;
+    }
+</style>
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+@*<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>*@
+<button class="btn btn-primary" @onclick="ResetCount">בוקר טוב אלעד. תלחץ עלי בבקשה כדי לראות משהו מגניב :-)</button>
+<div>
+    <img src="GreenBall.png" class="ball" />
+</div>
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private void ResetCount()
+    {
+        currentCount = 0;
+    }
+
+    protected override void OnInitialized()
+    {
+        new System.Threading.Timer(state =>
+        {
+            IncrementCount();
+            StateHasChanged();
+        }, null, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(200));
+    }
+}
