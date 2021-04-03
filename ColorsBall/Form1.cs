@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -6,6 +7,8 @@ namespace ColorsBall
 {
 	public partial class frmMain : Form
 	{
+		const string backgroundMusicFile = "Toby Fox - Megalovania.mp3";
+
 		int dx=10, dy=10;
 		bool stopPlayer = false;
 		bool stopBall = false;
@@ -16,12 +19,37 @@ namespace ColorsBall
 		const int secondsUntilRed = 2;//7;
 		const int secondsUntilGreen = secondsUntilRed + 3;//9;
 		bool isGreenBall = true;
+		WaveOutEvent backgroundMusic;
 
 		public frmMain()
 		{
+			backgroundMusic = PlayMusic(backgroundMusicFile);
+			backgroundMusic.PlaybackStopped += BackgroundMusic_PlaybackStopped;
+
 			InitializeComponent();
 			ticksUntilRed = SecondsToTicks(secondsUntilRed);
 			ticksUntilGreen = SecondsToTicks(secondsUntilGreen);
+		}
+
+		private void BackgroundMusic_PlaybackStopped(object sender, StoppedEventArgs e)
+		{
+			backgroundMusic = PlayMusic(backgroundMusicFile);
+			backgroundMusic.PlaybackStopped += BackgroundMusic_PlaybackStopped;
+		}
+		
+		private void StopBackgroundMusic()
+		{
+			backgroundMusic.PlaybackStopped -= BackgroundMusic_PlaybackStopped;
+			backgroundMusic.Stop();
+		}
+
+		private WaveOutEvent PlayMusic(string filename) 
+		{
+			var audioFileReader = new AudioFileReader(@"Resources\" +filename);
+			var waveOutEvent = new WaveOutEvent();
+			waveOutEvent.Init(audioFileReader);
+			waveOutEvent.Play();
+			return waveOutEvent;
 		}
 
 		private int SecondsToTicks(int seconds)
@@ -74,8 +102,11 @@ namespace ColorsBall
 						lives -= 10;
 						lblLives.Text = lives + "/100";
 						pgbLives.Value = lives;
+						PlayMusic("SansHit.mp3");
 						if (lives <= 0)
 						{
+							StopBackgroundMusic();
+							PlayMusic("Undertale Game Over Theme.mp3");
 							tmrBall.Stop();
 							MessageBox.Show("YOU LOSE!!!");
 						}
@@ -89,9 +120,12 @@ namespace ColorsBall
 						stopPlayer = true;
 						stopBall = true;
 						pgbBallLives.Value -= 10;
+						PlayMusic("gaster_blaster_sound_effect_1.mp3");
 						if (pgbBallLives.Value <= 0)
 						{
 							tmrBall.Stop();
+							StopBackgroundMusic();
+							PlayMusic("Undertale- Dogsong.mp3");
 							MessageBox.Show("YOU WIN!!!");
 						}
 					}
