@@ -112,11 +112,11 @@ namespace ColorsBall
 						}
 					}
 					else if (Keyboard.IsKeyDown(Key.Space))
-					{
+					{ 
 						pctPlayer.Image = Properties.Resources.sans_hits_ball;
 						if (dx > 0)
 							pctPlayer.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipX);
-
+						dx = -dx;
 						stopPlayer = true;
 						stopBall = true;
 						pgbBallLives.Value -= 10;
