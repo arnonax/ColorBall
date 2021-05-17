@@ -108,7 +108,7 @@ namespace ColorsBall
 							StopBackgroundMusic();
 							PlayMusic("Undertale Game Over Theme.mp3");
 							tmrBall.Stop();
-							MessageBox.Show("YOU LOSE!!!");
+							MessageBox.Show("GAME OVER!!!");
 						}
 					}
 					else if (Keyboard.IsKeyDown(Key.Space))
