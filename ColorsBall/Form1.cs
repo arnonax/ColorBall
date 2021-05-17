@@ -66,10 +66,17 @@ namespace ColorsBall
 			{
 				pctBall.Left += dx;
 				pctBall.Top += dy;
-				if (pctBall.Bottom >= pnlArena.ClientSize.Height || pctBall.Top < 0)
+				if ((pctBall.Bottom >= pnlArena.ClientSize.Height && dy>0) || (pctBall.Top < 0 && dy<0))
 					dy = -dy;
-				if (pctBall.Right >= pnlArena.ClientSize.Width || pctBall.Left < 0)
+				if ((pctBall.Right >= pnlArena.ClientSize.Width && dx>0) ||( pctBall.Left < 0 && dx<0))
 					dx = -dx;
+
+				// TODO: remove duplication of 10
+				if(Math.Abs(dx)!=10)
+				{
+					dx -= Math.Sign(dx)/2;
+					dy -= Math.Sign(dy)/2;
+				}
 			}
 
 			// Move player
@@ -112,11 +119,14 @@ namespace ColorsBall
 						}
 					}
 					else if (Keyboard.IsKeyDown(Key.Space))
-					{ 
+					{
 						pctPlayer.Image = Properties.Resources.sans_hits_ball;
 						if (dx > 0)
 							pctPlayer.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipX);
 						dx = -dx;
+						dx = (int)(dx * 3);
+						dy = (int)(dy * 3);
+
 						stopPlayer = true;
 						stopBall = true;
 						pgbBallLives.Value -= 10;
