@@ -9,7 +9,7 @@ namespace ColorsBall
 	{
 		const string backgroundMusicFile = "Toby Fox - Megalovania.mp3";
 
-		int dx=10, dy=10;
+		double dx=10, dy=10;
 		bool stopPlayer = false;
 		bool stopBall = false;
 		int timesUntilResurect = 0;
@@ -64,18 +64,18 @@ namespace ColorsBall
 			// Move ball
 			if (!stopBall)
 			{
-				pctBall.Left += dx;
-				pctBall.Top += dy;
+				pctBall.Left += (int)dx;
+				pctBall.Top += (int)dy;
 				if ((pctBall.Bottom >= pnlArena.ClientSize.Height && dy>0) || (pctBall.Top < 0 && dy<0))
 					dy = -dy;
 				if ((pctBall.Right >= pnlArena.ClientSize.Width && dx>0) ||( pctBall.Left < 0 && dx<0))
 					dx = -dx;
 
 				// TODO: remove duplication of 10
-				if(Math.Abs(dx)!=10)
+				if(Math.Abs(dx)>10)
 				{
-					dx -= Math.Sign(dx)/2;
-					dy -= Math.Sign(dy)/2;
+					dx -= (double)Math.Sign(dx)/4;
+					dy -= (double)Math.Sign(dy)/4;
 				}
 			}
 
@@ -124,8 +124,8 @@ namespace ColorsBall
 						if (dx > 0)
 							pctPlayer.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipX);
 						dx = -dx;
-						dx = (int)(dx * 3);
-						dy = (int)(dy * 3);
+						dx *=3;
+						dy *=3;
 
 						stopPlayer = true;
 						stopBall = true;
