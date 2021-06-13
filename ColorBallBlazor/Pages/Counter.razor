@@ -1,41 +1,162 @@
-﻿@page "/counter"
+﻿@using System.Drawing;
+
+@page "/counter"
 <style>
+    .arena {
+        border: solid;
+        height: @(this.pnlArena.Height)px;
+        width: @(this.pnlArena.Width)px;
+    }
+
     .ball {
         position:relative;
-        left:@(this.currentCount*10)px;
-        top:@(this.currentCount*10)px;
-        width:66px;
-        height:66px;
+        vertical-align:top;
+        left:@(this.pctBall.Left)px;
+        top:@(this.pctBall.Top)px;
+        width:@(this.pctBall.Width)px;
+        height:@(this.pctBall.Height)px;
+    }
+
+    .sans {
+        width:@(this.pctPlayer.Width)px;
+        height:@(this.pctPlayer.Height)px;
     }
 </style>
-<h1>Counter</h1>
 
-<p>Current count: @currentCount</p>
-
-@*<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>*@
-<button class="btn btn-primary" @onclick="ResetCount">בוקר טוב אלעד. תלחץ עלי בבקשה כדי לראות משהו מגניב :-)</button>
-<div>
+<div class="arena">
     <img src="GreenBall.png" class="ball" />
+    <img src="Sans.png" class="sans" />
 </div>
 @code {
-    private int currentCount = 0;
+    Rectangle pctBall = new Rectangle(0, 0, 66, 66);
+    Rectangle pnlArena = new Rectangle(0, 0, 1500, 750);
+    Rectangle pctPlayer = new Rectangle(0, 0, 103, 142);
 
-    private void IncrementCount()
+    double dx = 10, dy = 10;
+    bool stopPlayer = false;
+    bool stopBall = false;
+    int timesUntilResurect = 0;
+    int lives = 100;
+    int ticksUntilRed;
+    int ticksUntilGreen;
+    const int secondsUntilRed = 2;//7;
+    const int secondsUntilGreen = secondsUntilRed + 3;//9;
+    bool isGreenBall = true;
+
+    private void tmrBall_Tick()
     {
-        currentCount++;
-    }
+        // Move ball
+        if (!stopBall)
+        {
+            pctBall.X += (int)dx;
+            pctBall.Y += (int)dy;
+            if ((pctBall.Bottom >= pnlArena.Height && dy > 0) || (pctBall.Top < 0 && dy < 0))
+                dy = -dy;
+            if ((pctBall.Right >= pnlArena.Width && dx > 0) || (pctBall.Left < 0 && dx < 0))
+                dx = -dx;
 
-    private void ResetCount()
-    {
-        currentCount = 0;
-    }
+            // TODO: remove duplication of 10
+            if (Math.Abs(dx) > 10)
+            {
+                dx -= (double)Math.Sign(dx) / 4;
+                dy -= (double)Math.Sign(dy) / 4;
+            }
+        }
 
+        // Move player
+        if (!stopPlayer)
+        {
+            //if (Keyboard.IsKeyDown(Key.Up))
+            //    pctPlayer.Top -= 10;
+            //if (Keyboard.IsKeyDown(Key.Down))
+            //    pctPlayer.Top += 10;
+            //if (Keyboard.IsKeyDown(Key.Left))
+            //    pctPlayer.Left -= 10;
+            //if (Keyboard.IsKeyDown(Key.Right))
+            //    pctPlayer.Left += 10;
+            //if (pctPlayer.Top <= 0)
+            //    pctPlayer.Top = 0;
+            //if (pctPlayer.Left <= 0)
+            //    pctPlayer.Left = 0;
+            //if (pctPlayer.Bottom >= pnlArena.ClientSize.Height)
+            //    pctPlayer.Top = pnlArena.ClientSize.Height - pctPlayer.Height;
+            //if (pctPlayer.Right >= pnlArena.ClientSize.Width)
+            //    pctPlayer.Left = pnlArena.ClientSize.Width - pctPlayer.Width;
+
+            // Check if ball hits the player
+            if (pctPlayer.IntersectsWith(pctBall))
+            {
+                if (isGreenBall)
+                {
+                    stopPlayer = true;
+                    //pctPlayer.Image = Properties.Resources.sans_hit;
+                    lives -= 10;
+                    //lblLives.Text = lives + "/100";
+                    //pgbLives.Value = lives;
+                    //PlayMusic("SansHit.mp3");
+                    if (lives <= 0)
+                    {
+                        //StopBackgroundMusic();
+                        //PlayMusic("Undertale Game Over Theme.mp3");
+                        //tmrBall.Stop();
+                        //MessageBox.Show("GAME OVER!!!");
+                    }
+                }
+                //else if (Keyboard.IsKeyDown(Key.Space))
+                //{
+                //    pctPlayer.Image = Properties.Resources.sans_hits_ball;
+                //    if (dx > 0)
+                //        pctPlayer.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipX);
+                //    dx = -dx;
+                //    dx *= 3;
+                //    dy *= 3;
+
+                //    stopPlayer = true;
+                //    stopBall = true;
+                //    pgbBallLives.Value -= 10;
+                //    PlayMusic("gaster_blaster_sound_effect_1.mp3");
+                //    if (pgbBallLives.Value <= 0)
+                //    {
+                //        tmrBall.Stop();
+                //        StopBackgroundMusic();
+                //        PlayMusic("Undertale- Dogsong.mp3");
+                //        MessageBox.Show("YOU WIN!!!");
+                //    }
+                //}
+            }
+        }
+        else // stopPlayer == true
+        {
+            timesUntilResurect++;
+            if (timesUntilResurect == 30)
+            {
+                stopPlayer = false;
+                stopBall = false;
+                timesUntilResurect = 0;
+                //pctPlayer.Image = Properties.Resources.Sans;
+            }
+        }
+        ticksUntilRed--;
+        ticksUntilGreen--;
+        if (ticksUntilRed == 0)
+        {
+            //pctBall.Image = Properties.Resources.RedBall;
+            isGreenBall = false;
+        }
+        if (ticksUntilGreen == 0)
+        {
+            //pctBall.Image = Properties.Resources.GreenBall;
+            isGreenBall = true;
+            //ticksUntilRed = SecondsToTicks(secondsUntilRed);
+            //ticksUntilGreen = SecondsToTicks(secondsUntilGreen);
+        }
+    }
     protected override void OnInitialized()
     {
         new System.Threading.Timer(state =>
         {
-            IncrementCount();
+            tmrBall_Tick();
             StateHasChanged();
-        }, null, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(200));
+        }, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(20));
     }
 }

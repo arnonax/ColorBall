@@ -78,7 +78,7 @@
 			// tmrBall
 			// 
 			this.tmrBall.Enabled = true;
-			this.tmrBall.Interval = 20;
+			this.tmrBall.Interval = 10;
 			this.tmrBall.Tick += new System.EventHandler(this.tmrBall_Tick);
 			// 
 			// label1

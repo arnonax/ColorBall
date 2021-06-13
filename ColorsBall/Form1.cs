@@ -6,7 +6,9 @@ namespace ColorsBall
 {
 	public partial class frmMain : Form
 	{
-		int dx=10, dy=10;
+		const string backgroundMusicFile = "Toby Fox - Megalovania.mp3";
+
+		double dx=10, dy=10;
 		bool stopPlayer = false;
 		bool stopBall = false;
 		int timesUntilResurect = 0;
@@ -36,25 +38,32 @@ namespace ColorsBall
 			// Move ball
 			if (!stopBall)
 			{
-				pctBall.Left += dx;
-				pctBall.Top += dy;
-				if (pctBall.Bottom >= pnlArena.ClientSize.Height || pctBall.Top < 0)
+				pctBall.Left += (int)dx;
+				pctBall.Top += (int)dy;
+				if ((pctBall.Bottom >= pnlArena.ClientSize.Height && dy>0) || (pctBall.Top < 0 && dy<0))
 					dy = -dy;
 				if (pctBall.Right >= pnlArena.ClientSize.Width || pctBall.Left < 0)
 					dx = -dx;
+
+				// TODO: remove duplication of 10
+				if(Math.Abs(dx)>10)
+				{
+					dx -= (double)Math.Sign(dx)/4;
+					dy -= (double)Math.Sign(dy)/4;
+				}
 			}
 
 			// Move player
 			if (!stopPlayer)
 			{
 				if (Keyboard.IsKeyDown(Key.Up))
-					pctPlayer.Top -= 10;
+					pctPlayer.Top -= playerSpeed;
 				if (Keyboard.IsKeyDown(Key.Down))
-					pctPlayer.Top += 10;
+					pctPlayer.Top += playerSpeed;
 				if (Keyboard.IsKeyDown(Key.Left))
-					pctPlayer.Left -= 10;
+					pctPlayer.Left -= playerSpeed;
 				if (Keyboard.IsKeyDown(Key.Right))
-					pctPlayer.Left += 10;
+					pctPlayer.Left += playerSpeed;
 				if (pctPlayer.Top <= 0)
 					pctPlayer.Top = 0;
 				if (pctPlayer.Left <= 0)

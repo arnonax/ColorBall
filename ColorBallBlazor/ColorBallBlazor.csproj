@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Sans.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\GreenBall.png" />
+    <None Include="wwwroot\Sans.png" />
   </ItemGroup>
 
   <ItemGroup>
