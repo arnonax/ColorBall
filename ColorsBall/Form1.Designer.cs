@@ -37,9 +37,11 @@
 			this.pgbLives = new System.Windows.Forms.ProgressBar();
 			this.lblLives = new System.Windows.Forms.Label();
 			this.pgbBallLives = new System.Windows.Forms.ProgressBar();
+			this.pctFlash = new System.Windows.Forms.PictureBox();
 			this.pnlArena.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pctBall)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pctPlayer)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pctFlash)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pnlArena
@@ -117,11 +119,22 @@
 			this.pgbBallLives.TabIndex = 4;
 			this.pgbBallLives.Value = 100;
 			// 
+			// pctFlash
+			// 
+			this.pctFlash.BackColor = System.Drawing.Color.Black;
+			this.pctFlash.Location = new System.Drawing.Point(-32, -12);
+			this.pctFlash.Name = "pctFlash";
+			this.pctFlash.Size = new System.Drawing.Size(1180, 678);
+			this.pctFlash.TabIndex = 5;
+			this.pctFlash.TabStop = false;
+			this.pctFlash.Visible = false;
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1118, 641);
+			this.Controls.Add(this.pctFlash);
 			this.Controls.Add(this.pgbBallLives);
 			this.Controls.Add(this.lblLives);
 			this.Controls.Add(this.pgbLives);
@@ -135,6 +148,7 @@
 			this.pnlArena.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pctBall)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pctPlayer)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pctFlash)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -150,6 +164,7 @@
 		private System.Windows.Forms.ProgressBar pgbLives;
 		private System.Windows.Forms.Label lblLives;
 		private System.Windows.Forms.ProgressBar pgbBallLives;
+		private System.Windows.Forms.PictureBox pctFlash;
 	}
 }
 

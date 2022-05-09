@@ -7,6 +7,16 @@ namespace ColorsBall
 {
 	public partial class frmMain : Form
 	{
+		// TODO:
+		// 1. מפוקסל
+		// 2. רואה כפול
+		// 3. מסך מהבהב
+		// 4. כח משיכה
+		// 5. שתי כדורים
+		// 6. כדור אחד ענק
+		// 7. אתה בתוך הכדור
+		// 8. מצב פק-מן
+
 		const string backgroundMusicFile = "Toby Fox - Megalovania.mp3";
 
 		double dx=10, dy=10;
@@ -19,6 +29,8 @@ namespace ColorsBall
 		const int secondsUntilRed = 2;//7;
 		const int secondsUntilGreen = secondsUntilRed + 3;//9;
 		bool isGreenBall = true;
+		bool flash = false;
+		int ticksUntilFlash = 3;
 		WaveOutEvent backgroundMusic;
 
 		public frmMain()
@@ -150,10 +162,21 @@ namespace ColorsBall
 					stopBall = false;
 					timesUntilResurect = 0;
 					pctPlayer.Image = Properties.Resources.Sans;
+					if (pgbBallLives.Value == 90)
+						flash = true;
+					else
+						flash = false;
 				}
 			}
-			ticksUntilRed--;
+			if (flash == true)
+				ticksUntilFlash--;
 			ticksUntilGreen--;
+			ticksUntilRed--;
+			if (ticksUntilFlash == 0)
+			{
+				pctFlash.Visible = !pctFlash.Visible;
+				ticksUntilFlash = 3;
+			}	
 			if (ticksUntilRed == 0)
 			{
 				pctBall.Image = Properties.Resources.RedBall;
