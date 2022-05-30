@@ -31,6 +31,9 @@ namespace ColorsBall
 		bool isGreenBall = true;
 		bool flash = false;
 		int ticksUntilFlash = 3;
+		bool pacman = false;
+		int x = 0;
+		int y = 0;
 		WaveOutEvent backgroundMusic;
 
 		public frmMain()
@@ -95,13 +98,31 @@ namespace ColorsBall
 			if (!stopPlayer)
 			{
 				if (Keyboard.IsKeyDown(Key.Up))
+				{
 					pctPlayer.Top -= 10;
+					y = -10;
+					x = 0;
+				}
 				if (Keyboard.IsKeyDown(Key.Down))
+				{
 					pctPlayer.Top += 10;
+					y = 10;
+					x = 0;
+				}
 				if (Keyboard.IsKeyDown(Key.Left))
+				{
 					pctPlayer.Left -= 10;
+					y = 0;
+					x = -10;
+				}
 				if (Keyboard.IsKeyDown(Key.Right))
+				{
 					pctPlayer.Left += 10;
+					y = 0;
+					x = 10;
+				}
+				pctPlayer.Top += y;
+				pctPlayer.Left += x;
 				if (pctPlayer.Top <= 0)
 					pctPlayer.Top = 0;
 				if (pctPlayer.Left <= 0)
@@ -166,6 +187,12 @@ namespace ColorsBall
 						flash = true;
 					else
 						flash = false;
+					if (pgbBallLives.Value == 80)
+					{
+						pctFlash.Visible = false;
+						pacman = true;
+					}
+
 				}
 			}
 			if (flash == true)
