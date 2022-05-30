@@ -121,8 +121,11 @@ namespace ColorsBall
 					y = 0;
 					x = 10;
 				}
-				pctPlayer.Top += y;
-				pctPlayer.Left += x;
+				if (pacman == true)
+				{
+					pctPlayer.Top += y;
+					pctPlayer.Left += x;
+				}
 				if (pctPlayer.Top <= 0)
 					pctPlayer.Top = 0;
 				if (pctPlayer.Left <= 0)
